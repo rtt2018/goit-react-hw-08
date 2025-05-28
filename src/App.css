@@ -1,0 +1,27 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.componentsWrap {
+  box-sizing: border-box;
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  width: 348px;
+}
+
+.componentsAllWrap {
+  display: flex;
+  gap: 16px;
+}
