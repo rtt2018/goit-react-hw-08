@@ -1,7 +1,7 @@
 import axios from "axios";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createAction } from "@reduxjs/toolkit";
 
-axios.defaults.baseURL = 'https://6834b1eacd78db2058bf12f7.mockapi.io/'
+axios.defaults.baseURL = 'https://connections-api.goit.global/'
 
 
 export const fetchContacts = createAsyncThunk(
@@ -39,3 +39,5 @@ export const deleteContact = createAsyncThunk(
         }
     }
 );
+
+export const clearContacts = createAction("contacts/clear");
