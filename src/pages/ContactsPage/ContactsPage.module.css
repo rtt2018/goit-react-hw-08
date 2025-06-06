@@ -1,0 +1,12 @@
+.componentsWrap {
+  box-sizing: border-box;
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  width: 348px;
+}
+
+.componentsAllWrap {
+  display: flex;
+  gap: 16px;
+}

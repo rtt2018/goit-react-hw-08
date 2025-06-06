@@ -5,6 +5,8 @@ import SearchBox from './components/SearchBox/SearchBox';
 import { useEffect } from 'react';
 import { fetchContacts } from './redux/contacts/operations';
 import { useDispatch } from 'react-redux';
+import Layout from './components/Layout/Layout';
+import AppBar from './components/AppBar/AppBar';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -14,17 +16,11 @@ export default function App() {
   }, [dispatch]);
 
   return (
-    <div>
-      <h1>Phonebook</h1>
-      <div className="componentsAllWrap">
-        <div className="componentsWrap">
-          <ContactForm />
-          <SearchBox />
-        </div>
-        <div className="componentsWrap">
-          <ContactList />
-        </div>
-      </div>
-    </div>
+    <>
+      <Layout >
+        <AppBar />
+
+      </Layout >
+    </>
   )
 }
