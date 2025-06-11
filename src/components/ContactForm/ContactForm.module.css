@@ -3,6 +3,8 @@
   border-radius: 8px;
   padding: 8px;
   /* max-width: 300px; */
+  box-shadow: hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px,
+    hsla(220, 25%, 10%, 0.08) 0px 15px 35px -5px;
 }
 
 .formContainer {
@@ -11,26 +13,72 @@
   gap: 8px;
 }
 
-.buttonAddContact {
-  margin-top: 16px;
-  display: block;
-}
-
 .labelContact {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 4px;
   align-items: flex-start;
+  color: #d1a7ed;
 }
 
 .contactInput {
   box-sizing: border-box;
   width: 100%;
   height: auto;
-  border: solid 1px #1f1d1d;
+  /* border: solid 1px #1f1d1d; */
   border-radius: 6px;
   outline: none;
   padding: 8px 16px;
   font-size: 16px;
+  box-shadow: 0 0 18px #b88cd6;
+  color: #5a0b8f;
+  border: solid 2px #b88cd6;
+  background-color: #c3bac9;
+}
+
+.contactInput:focus {
+  box-shadow: 0 0 18px #b88cd6, inset 0 0 10px #b88cd6;
+  border-color: #5a0b8f;
+}
+/* 
+.buttonAddContact {
+  margin-top: 16px;
+  display: block;
+} */
+
+.buttonAddContact {
+  height: 40px;
+  background-color: rgb(128, 27, 187);
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.04em;
+  color: #d1a7ed;
+  /* -webkit-text-stroke: 1px rgb(139, 138, 189); */
+  border-radius: 8px;
+  padding: 8px 16px;
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+  margin: 32px 0;
+  transition: 0.3s ease-in;
+  transition-property: box-shadow, color;
+}
+
+.buttonAddContact:hover {
+  box-shadow: 0 0 18px #802cb8;
+}
+
+.buttonAddContact:focus,
+.buttonAddContact:focus-visible {
+  box-shadow: 0 0 18px #802cb8;
+  outline: none;
+}
+
+.buttonAddContact:active {
+  color: aqua;
+  -webkit-text-stroke: 0 transparent;
 }

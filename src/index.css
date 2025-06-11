@@ -54,7 +54,7 @@ button:active {
   background-color: rgb(115, 115, 182);
   color: #f9f9f9;
 }
-
+/* 
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -66,4 +66,4 @@ button:active {
   button {
     background-color: #f9f9f9;
   }
-}
+} */

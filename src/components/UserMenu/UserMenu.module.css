@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  gap: 32px;
+  margin: 0 0 0 auto;
+  align-items: center;
+}
+
+.buttonLogout {
+  height: 40px;
+  background-color: rgb(128, 27, 187);
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.04em;
+  color: #d1a7ed;
+
+  /* -webkit-text-stroke: 1px rgb(139, 138, 189); */
+  border-radius: 8px;
+  padding: 8px 16px;
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+  /* margin: 32px 0; */
+  transition: 0.3s ease-in;
+  transition-property: box-shadow, color;
+}
+
+.buttonLogout:hover {
+  box-shadow: 0 0 18px #802cb8;
+}
+
+.buttonLogout:focus,
+.buttonLogout:focus-visible {
+  box-shadow: 0 0 18px #802cb8;
+  outline: none;
+}
+
+.buttonLogout:active {
+  color: aqua;
+  -webkit-text-stroke: 0 transparent;
+}
+
+.username {
+  color: #8c66c5;
+  font-weight: 700;
+  text-shadow: 0 0 18px #e9ff00;
+}

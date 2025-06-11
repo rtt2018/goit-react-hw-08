@@ -1,32 +1,22 @@
-.componentsWrap {
+.container {
+  margin-top: 164px;
   box-sizing: border-box;
   display: flex;
-  gap: 16px;
+  gap: 8px;
   flex-direction: column;
-  width: 348px;
-}
-
-.componentsAllWrap {
-  display: flex;
-  gap: 16px;
-}
-
-body {
-  color: hsl(0, 0%, 100%);
-  background-color: hsl(220, 35%, 3%);
-}
-
-.container {
-  margin-top: 64px;
-  padding: 24px;
 }
 
 .head {
-  font-size: 42px;
+  font-size: 48px;
   background: linear-gradient(180deg, #7a6cf4 42.79%, #646cff 74.04%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 1px rgb(203, 156, 241);
   text-shadow: 0 0 5px rgb(91, 130, 214), 0 0 1px rgb(176, 101, 219);
+}
+
+.description {
+  color: #8c66c5;
+  font-weight: 700;
 }

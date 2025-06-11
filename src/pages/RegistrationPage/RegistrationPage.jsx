@@ -1,10 +1,10 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
+// import Checkbox from '@mui/material/Checkbox';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
-import FormControlLabel from '@mui/material/FormControlLabel';
+// import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
 import Link from '@mui/material/Link';
@@ -13,8 +13,13 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
-import AppTheme from '../shared-theme/AppTheme';
-import ColorModeSelect from '../shared-theme/ColorModeSelect';
+import ColorModeSelect from '../../shared-theme/AppTheme';
+import AppTheme from '../../shared-theme/AppTheme';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import css from './RegistrationPage.module.css'
+import { register } from '../../redux/auth/operations';
 
 const Card = styled(MuiCard)(({ theme }) => ({
     display: 'flex',
@@ -36,7 +41,8 @@ const Card = styled(MuiCard)(({ theme }) => ({
 }));
 
 const SignUpContainer = styled(Stack)(({ theme }) => ({
-    height: 'calc((1 - var(--template-frame-height, 0)) * 100dvh)',
+    height: '100%',
+    marginTop: '164px',
     minHeight: '100%',
     padding: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
@@ -59,69 +65,33 @@ const SignUpContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export default function SignUp(props) {
-    const [emailError, setEmailError] = React.useState(false);
-    const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
-    const [passwordError, setPasswordError] = React.useState(false);
-    const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
-    const [nameError, setNameError] = React.useState(false);
-    const [nameErrorMessage, setNameErrorMessage] = React.useState('');
+    const dispatch = useDispatch();
 
-    const validateInputs = () => {
-        const email = document.getElementById('email');
-        const password = document.getElementById('password');
-        const name = document.getElementById('name');
-
-        let isValid = true;
-
-        if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
-            setEmailError(true);
-            setEmailErrorMessage('Please enter a valid email address.');
-            isValid = false;
-        } else {
-            setEmailError(false);
-            setEmailErrorMessage('');
-        }
-
-        if (!password.value || password.value.length < 6) {
-            setPasswordError(true);
-            setPasswordErrorMessage('Password must be at least 6 characters long.');
-            isValid = false;
-        } else {
-            setPasswordError(false);
-            setPasswordErrorMessage('');
-        }
-
-        if (!name.value || name.value.length < 1) {
-            setNameError(true);
-            setNameErrorMessage('Name is required.');
-            isValid = false;
-        } else {
-            setNameError(false);
-            setNameErrorMessage('');
-        }
-
-        return isValid;
-    };
-
-    const handleSubmit = (event) => {
-        if (nameError || emailError || passwordError) {
-            event.preventDefault();
-            return;
-        }
-        const data = new FormData(event.currentTarget);
-        console.log({
-            name: data.get('name'),
-            lastName: data.get('lastName'),
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-    };
+    const formik = useFormik({
+        initialValues: {
+            name: '',
+            email: '',
+            password: '',
+        },
+        validationSchema: Yup.object({
+            name: Yup.string().required('Name is required.'),
+            email: Yup.string()
+                .email('Please enter a valid email address.')
+                .required('Email is required.'),
+            password: Yup.string()
+                .min(6, 'Password must be at least 6 characters long.')
+                .required('Password is required.'),
+        }),
+        onSubmit: (values) => {
+            dispatch(register(values));
+        },
+    });
 
     return (
         <AppTheme {...props}>
             <CssBaseline enableColorScheme />
-            <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} />
-            <SignUpContainer direction="column" justifyContent="space-between">
+            <SignUpContainer direction="column" justifyContent="space-between" boxSizing='border-box'>
+                <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} />
                 <Card variant="outlined">
                     <Typography
                         component="h1"
@@ -132,11 +102,11 @@ export default function SignUp(props) {
                     </Typography>
                     <Box
                         component="form"
-                        onSubmit={handleSubmit}
+                        onSubmit={formik.handleSubmit}
                         sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
                     >
                         <FormControl>
-                            <FormLabel htmlFor="name">Full name</FormLabel>
+                            <FormLabel className={css.label} htmlFor="name">Full name</FormLabel>
                             <TextField
                                 autoComplete="name"
                                 name="name"
@@ -144,13 +114,16 @@ export default function SignUp(props) {
                                 fullWidth
                                 id="name"
                                 placeholder="Jon Snow"
-                                error={nameError}
-                                helperText={nameErrorMessage}
-                                color={nameError ? 'error' : 'primary'}
+                                value={formik.values.name}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                error={formik.touched.name && Boolean(formik.errors.name)}
+                                helperText={formik.touched.name && formik.errors.name}
+                                color={formik.errors.name ? 'error' : 'primary'}
                             />
                         </FormControl>
                         <FormControl>
-                            <FormLabel htmlFor="email">Email</FormLabel>
+                            <FormLabel className={css.label} htmlFor="email">Email</FormLabel>
                             <TextField
                                 required
                                 fullWidth
@@ -159,13 +132,16 @@ export default function SignUp(props) {
                                 name="email"
                                 autoComplete="email"
                                 variant="outlined"
-                                error={emailError}
-                                helperText={emailErrorMessage}
-                                color={passwordError ? 'error' : 'primary'}
+                                value={formik.values.email}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                error={formik.touched.email && Boolean(formik.errors.email)}
+                                helperText={formik.touched.email && formik.errors.email}
+                                color={formik.errors.email ? 'error' : 'primary'}
                             />
                         </FormControl>
                         <FormControl>
-                            <FormLabel htmlFor="password">Password</FormLabel>
+                            <FormLabel className={css.label} htmlFor="password">Password</FormLabel>
                             <TextField
                                 required
                                 fullWidth
@@ -175,20 +151,18 @@ export default function SignUp(props) {
                                 id="password"
                                 autoComplete="new-password"
                                 variant="outlined"
-                                error={passwordError}
-                                helperText={passwordErrorMessage}
-                                color={passwordError ? 'error' : 'primary'}
+                                value={formik.values.password}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                error={formik.touched.password && Boolean(formik.errors.password)}
+                                helperText={formik.touched.password && formik.errors.password}
+                                color={formik.errors.password ? 'error' : 'primary'}
                             />
                         </FormControl>
-                        <FormControlLabel
-                            control={<Checkbox value="allowExtraEmails" color="primary" />}
-                            label="I want to receive updates via email."
-                        />
                         <Button
                             type="submit"
                             fullWidth
                             variant="contained"
-                            onClick={validateInputs}
                         >
                             Sign up
                         </Button>
@@ -200,7 +174,7 @@ export default function SignUp(props) {
                         <Typography sx={{ textAlign: 'center' }}>
                             Already have an account?{' '}
                             <Link
-                                href="/material-ui/getting-started/templates/sign-in/"
+                                href="/"
                                 variant="body2"
                                 sx={{ alignSelf: 'center' }}
                             >

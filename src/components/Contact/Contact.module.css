@@ -10,6 +10,7 @@
   padding: 4px;
   align-items: center;
   gap: 8px;
+  color: #d1a7ed;
 }
 
 .contactDataDescript {
@@ -17,11 +18,10 @@
   margin: 0;
   padding: 4px;
   gap: 8px;
+  color: #d1a7ed;
 }
 
 .contactDeleteButton {
-  box-sizing: border-box;
-  height: 42px;
 }
 
 .listItem {
@@ -35,4 +35,41 @@
   align-items: center;
   justify-content: space-between;
   width: 310px;
+}
+
+.contactDeleteButton {
+  background-color: rgb(128, 27, 187);
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.04em;
+  color: #d1a7ed;
+  box-sizing: border-box;
+  height: 42px;
+  /* -webkit-text-stroke: 1px rgb(139, 138, 189); */
+  border-radius: 8px;
+  padding: 8px 16px;
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+  /* margin: 32px 0; */
+  transition: 0.3s ease-in;
+  transition-property: box-shadow, color;
+}
+
+.contactDeleteButton:hover {
+  box-shadow: 0 0 18px #802cb8;
+}
+
+.contactDeleteButton:focus,
+.contactDeleteButton:focus-visible {
+  box-shadow: 0 0 18px #802cb8;
+  outline: none;
+}
+
+.contactDeleteButton:active {
+  color: aqua;
+  -webkit-text-stroke: 0 transparent;
 }

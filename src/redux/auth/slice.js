@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { register, login, logout, refreshUser } from "./operations";
-import { useDispatch } from "react-redux";
-import { clearContacts } from '../contacts/operations'
+// import { clearContacts } from '../contacts/operations'
 
 // const handlePending = (state) => {
 // }
@@ -43,8 +42,6 @@ const authSlice = createSlice({
             // .addCase(logout.pending, handlePending)
             // .addCase(logout.rejected, handleRejected)
             .addCase(logout.fulfilled, (state, action) => {
-                const dispatch = useDispatch()
-                dispatch(clearContacts)
                 state.user = { name: null, email: null };
                 state.token = null;
                 state.isLoggedIn = false;

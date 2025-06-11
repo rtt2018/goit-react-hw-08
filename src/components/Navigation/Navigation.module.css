@@ -1,0 +1,25 @@
+.container {
+  /* styles for Navigation */
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav a {
+  padding: 20px 0;
+}
+
+.link {
+  /* margin: 20px 0; */
+}
+
+.linkActive {
+  /* margin: 20px 0; */
+  color: #646cff;
+  text-shadow: 0 0 18px #e9ff00;
+  -webkit-text-stroke: 1px rgb(109, 27, 177);
+}
